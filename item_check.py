@@ -35,6 +35,7 @@ def get_item_data(barcode):
         return column_values.iloc[0]
     else:
         print("該当する行が見つかりませんでした。")
+        print(f"入力されたバーコード{barcode}、型{type(barcode)}")
         st.session_state.error_code = 1
         return None
 
@@ -56,7 +57,10 @@ def main():
     # ■■■■■■■■■■■ 画面1 バーコード入力 ■■■■■■■■■■■
     if st.session_state.count == 0:
         with st.form("my_form", clear_on_submit=True):
-            st.session_state.bcd = st.text_input('バーコードを入力してください。')
+            # st.session_state.bcd = st.text_input('バーコードを入力してください。')
+            bcd_tmp = str(st.number_input("バーコードを入力してください。", value=None, placeholder="0"))
+            # streamlitの仕様でnumber_inputを使うと、.0までくっついてくる為、それを除去する。
+            st.session_state.bcd = bcd_tmp.split(".")[0]
             submitted = st.form_submit_button("商品データ表示")
 
         if submitted:  # ボタンが押されたらカウントを1にする。
