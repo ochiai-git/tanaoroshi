@@ -6,7 +6,6 @@ from io import BytesIO
 import requests
 import sub
 import os
-import openpyxl
 
 def url_to_image_selenium(driver,url):
     # URLの画像データを読み込む
