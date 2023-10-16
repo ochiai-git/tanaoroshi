@@ -19,14 +19,15 @@ def url_to_image_selenium(driver,url):
 def get_item_data(barcode):
     # Excelファイルを読み込み
     # file_path = '棚卸アプリ用のDB.xlsx'  # Excelファイルのパスを指定してください
-    file_path = 'item_db.csv'  # Excelファイルのパスを指定してください
+    file_path = 'item_db_2.csv'  # Excelファイルのパスを指定してください
     sheet_name = 'Sheet'  # シート名を適宜変更してください
 
     # df = pd.read_excel(file_path, sheet_name=sheet_name)  # エンコードを指定する必要はないとのこと。というか指定できない。
-    df = pd.read_csv(file_path, encoding='shift-jis')  # streamlitでopenpyxlでエラーが出るのでcsvにした。
+    df = pd.read_csv(file_path)  # streamlitでopenpyxlでエラーが出るのでcsvにした。
 
     # 条件に一致する行を抽出
-    filtered_rows = df[df['バーコード'] == int(barcode)]
+    # filtered_rows = df[df['バーコード'] == int(barcode)]
+    filtered_rows = df[df['バーコード'] == barcode]
 
     # 値を取得
     if not filtered_rows.empty:
